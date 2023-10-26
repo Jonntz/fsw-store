@@ -31,8 +31,10 @@ const ProductItem = ({ product }: ProductItemProps) => {
             </div>
                     
 
-            <div className="flex flex-col gap-1">
-                <p className="text-sm overflow-hidden whitespace-nowrap text-ellipsis w-full"> {product.name} </p>
+            <div>
+                <p className="text-sm overflow-hidden whitespace-nowrap text-ellipsis w-full"> 
+                    {product.name} 
+                </p>
                 
                 <div className="flex items-center gap-2">
                     {product.discountPercentage > 0 ? (
