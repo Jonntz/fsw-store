@@ -1,4 +1,3 @@
-
 import { db } from "@/lib/prisma";
 import CategoryItem from "./categoryItem";
 
