@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Categories from './components/categories'
 import { db } from '@/lib/prisma'
 import ProductList from './components/product-list'
@@ -23,15 +22,17 @@ export default async function Home() {
   })
 
   const mouses = await db.product.findMany({
-    where:{
-      category:{
-        slug:'mouses'
-      }
-    }
-  })
+    where: {
+      category: {
+        slug: "mouses",
+      },
+    },
+  });
+
+  console.log(mouses)
 
   return (
-    <div className='flex flex-col gap-8'>
+    <div className='flex flex-col gap-8 py-8'>
       <PromoBanner 
         src="/banner-home-01.png"
         alt='até 55% de desconto esse mês'
@@ -67,6 +68,8 @@ export default async function Home() {
         <SectionTitle>Mouses</SectionTitle>
         <ProductList products={mouses} />
       </div>
+
+      
     </div>
   )
 }
