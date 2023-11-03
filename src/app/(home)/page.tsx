@@ -24,12 +24,10 @@ export default async function Home() {
   const mouses = await db.product.findMany({
     where: {
       category: {
-        slug: "mouses",
+        slug: 'mouses',
       },
     },
   });
-
-  console.log(mouses)
 
   return (
     <div className='flex flex-col gap-8 py-8'>
