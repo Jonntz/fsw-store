@@ -17,9 +17,8 @@ const CategoryProducts = async ({params}: any) => {
         }
     )
 
-    if (!category) {
-        return null
-    }
+    if (!category) return null
+    
 
     return (
             <div className="flex flex-col gap-8 p-5">
