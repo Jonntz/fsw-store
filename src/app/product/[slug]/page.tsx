@@ -3,6 +3,7 @@ import ProductImages from "./components/product-images";
 import ProductInfo from "./components/product-info";
 import { computeTotalPrice } from "@/helpers/product";
 import ProductList from "@/components/ui/product-list";
+import SectionTitle from "@/components/ui/section-title";
 
 interface ProductDetailsPageProps {
     params:{
@@ -37,7 +38,10 @@ const ProductDetailsPage = async ({params: {slug}}: ProductDetailsPageProps) => 
         <ProductImages imageUrls={product.imageUrls} name={product.name}/>
         <ProductInfo product={computeTotalPrice(product)}/>
 
-        <ProductList products={product.category.products} />
+        <div>
+            <SectionTitle>Produtos Recomendados</SectionTitle>
+            <ProductList products={product.category.products} />
+        </div>
     </div> ;
 }
  
