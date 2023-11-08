@@ -28,9 +28,7 @@ const ProductInfo = ({
     }
 
     const handleAddToCartClick = () => {
-        console.log(products)
         addProductToCart({...product, quantity})
-        
     }
 
 
