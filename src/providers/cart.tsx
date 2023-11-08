@@ -40,13 +40,13 @@ const CartProvider = ({children}: {children: ReactNode}) => {
 
     const subtotal = useMemo(() => {
         return products.reduce((acc, product) => {
-            return acc + Number(product.basePrice)
+            return acc + Number(product.basePrice) * product.quantity
         }, 0)
     }, [products])
 
     const total = useMemo(() => {
         return products.reduce((acc, product) => {
-            return acc + product.totalPrice
+            return acc + product.totalPrice * product.quantity
         }, 0)
     }, [products])
 
