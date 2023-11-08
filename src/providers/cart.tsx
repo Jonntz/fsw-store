@@ -1,18 +1,20 @@
 "use client"
 
 import { ProductWithTotalPrice } from "@/helpers/product";
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useMemo, useState } from "react";
 
 export interface CartProduct extends ProductWithTotalPrice {
     quantity: number
 }
 
-
 interface ICartContext{
-    products: CartProduct[]
-    cartTotalPrice: number
-    cartBasePrice: number
-    totalDiscount: number
+    products: CartProduct[],
+    cartTotalPrice: number,
+    cartBasePrice: number,
+    total: number,
+    subtotal: number,
+    totalDiscount: number,
+    discountTotal: number,
     addProductToCart: (product: CartProduct) => void,
     decreaseProductQuantity: (productId: string) => void,
     increaseProductQuantity: (productId: string) => void,
@@ -23,7 +25,10 @@ export const CartContext = createContext<ICartContext>({
     products: [],
     cartBasePrice: 0,
     cartTotalPrice: 0,
+    total: 0,
+    subtotal: 0,
     totalDiscount: 0,
+    discountTotal: 0,
     addProductToCart: () => {},
     decreaseProductQuantity: () => {},
     increaseProductQuantity: () => {},
@@ -32,6 +37,20 @@ export const CartContext = createContext<ICartContext>({
 
 const CartProvider = ({children}: {children: ReactNode}) => {
     const [products, setProducts] = useState<CartProduct[]>([])
+
+    const subtotal = useMemo(() => {
+        return products.reduce((acc, product) => {
+            return acc + Number(product.basePrice)
+        }, 0)
+    }, [products])
+
+    const total = useMemo(() => {
+        return products.reduce((acc, product) => {
+            return acc + product.totalPrice
+        }, 0)
+    }, [products])
+
+    const discountTotal = total - subtotal
 
     const addProductToCart = (product: CartProduct) => {
         const productsIsAlreadyInCart = products.some(cartProduct => cartProduct.id === product.id)
@@ -97,7 +116,11 @@ const CartProvider = ({children}: {children: ReactNode}) => {
             removeProductsFromCart,
             cartBasePrice: 0,
             cartTotalPrice: 0,
+            discountTotal,
+            total,
+            subtotal,
             totalDiscount: 0
+
         }}>
             {children}
         </CartContext.Provider>
