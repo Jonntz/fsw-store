@@ -39,6 +39,6 @@
 //     return NextResponse.json({ received: true })
 // } 
 
-function testing() {
+export function testing() {
     console.log('')
 }
