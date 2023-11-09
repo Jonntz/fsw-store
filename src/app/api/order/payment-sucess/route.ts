@@ -38,3 +38,7 @@
 
 //     return NextResponse.json({ received: true })
 // } 
+
+function testing() {
+    console.log('')
+}
