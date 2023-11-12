@@ -5,16 +5,18 @@ import { PackageSearchIcon } from "lucide-react";
 import { getServerSession } from "next-auth";
 import OrderItem from "./components/order-item";
 
-const OrdersPage =async () => {
-    const user = getServerSession(authOptions)
+export const dynamic = "force-dynamic";
 
-    if (!user) {
+const OrdersPage =async () => {
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user) {
         return <p>Acesso Negado</p>
     }
 
     const orders = await db.order.findMany({
         where: {
-            userId: (user as any).id
+            userId: session.user.id
         },
         include:{
             orderProduct: {
