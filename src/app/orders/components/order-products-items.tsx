@@ -15,7 +15,7 @@ const OrderProductItems = ({orderProduct}: OrderProductItemsProps) => {
 
     return ( 
         <div className="flex gap-4 items-center">
-            <div className="bg-accent rounded-lg w-[77px] h-[77px] flex items-center">
+            <div className="bg-accent rounded-lg w-[100px] h-[77px] flex items-center">
                 <Image 
                     src={orderProduct.product.imageUrls[0]} 
                     alt={orderProduct.product.name}
