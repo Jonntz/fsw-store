@@ -42,27 +42,52 @@ const OrderItem = ({order}: orderItemsProps) => {
             <Accordion type="single" className="w-full" collapsible>
                 <AccordionItem value={order.id}>
                     <AccordionTrigger>
-                        <div className="flex flex-col gap-1 text-left">
-                            <p>Pedido com {order.orderProduct.length} produto(s)</p>
-                            <span className="text-xs opacity-60">feito em {format(order.createdAt, "dd/mm/yyyy")}</span>
+                    <div className="flex w-full text-left">
+                        <div className="flex flex-1 flex-col gap-1 text-left">
+                            <p className="text-sm font-bold uppercase lg:text-base">
+                            Pedido com {order.orderProduct.length} produto(s)
+                            </p>
+                            <span className="text-xs opacity-60">
+                            Feito em {format(order.createdAt, "d/MM/y 'às' HH:mm")}
+                            </span>
+                        </div>
+
+                        <div className="hidden flex-1 font-bold lg:block">
+                            <p className="text-xs lg:text-sm">Status</p>
+                            <p className="text-xs text-[#8162FF] lg:text-sm">
+                            {getOrderStatus(order.status)}
+                            </p>
+                        </div>
+
+                        <div className="hidden flex-1 lg:block">
+                            <p className="text-xs font-bold lg:text-sm ">Data</p>
+                            <p className="text-xs opacity-60 lg:text-sm">
+                            {format(order.createdAt, "d/MM/y")}
+                            </p>
+                        </div>
+
+                        <div className="hidden flex-1 lg:block">
+                            <p className="text-xs font-bold lg:text-sm">Pagamento</p>
+                            <p className="text-xs opacity-60 lg:text-sm">Cartão</p>
+                        </div>
                         </div>
                     </AccordionTrigger>
                     <AccordionContent>
                         <div className="flex flex-col gap-4">
-                            <div className="flex items-center justify-between p-2">
-                                <div className="font-bold ">
-                                    <p>Status</p>
-                                    <p className="text-[#8162FF]">{getOrderStatus(order.status)}</p>
+                            <div className="flex items-center justify-between lg:hidden">
+                                <div className="font-bold">
+                                    <p className="text-xs lg:text-sm">Status</p>
+                                    <p className="text-[#8162FF] lg:text-sm">{getOrderStatus(order.status)}</p>
                                 </div>
 
                                 <div>
-                                    <p className="font-bold">Data</p>
-                                    <p className="opacity-60"> {format(order.createdAt, "dd/mm/yyyy")} </p>
+                                    <p className="font-bold text-xs lg:text-sm">Data</p>
+                                    <p className="text-xs opacity-60 lg:text-sm"> {format(order.createdAt, "dd/mm/yyyy")} </p>
                                 </div>
 
                                 <div>
-                                    <p className="font-bold">Pagamento</p>
-                                    <p className="opacity-60"> Cartão</p>
+                                    <p className="font-bold text-xs lg:text-sm">Pagamento</p>
+                                    <p className="text-xs opacity-60 lg:text-sm"> Cartão</p>
                                 </div>
                             </div>
 
@@ -73,28 +98,28 @@ const OrderItem = ({order}: orderItemsProps) => {
                             <div className="flex flex-col gap-1 w-full text-xs">
                                 <Separator />
 
-                                <div className="flex justify-between w-full py-3">
+                                <div className="flex justify-between w-full py-3 lg:text-sm">
                                     <p>Subtotal</p>
                                     <p>R$ {subtotal.toFixed(2)}</p>
                                 </div>
 
                                 <Separator />
 
-                                <div className="flex justify-between w-full py-3">
+                                <div className="flex justify-between w-full py-3 lg:text-sm">
                                     <p>Entrega</p>
                                     <p>GRÁTIS</p>
                                 </div>
 
                                 <Separator />
 
-                                <div className="flex justify-between w-full py-3">
+                                <div className="flex justify-between w-full py-3 lg:text-sm">
                                     <p>Descontos</p>
                                     <p>R$ {totalDiscount.toFixed(2)}</p>
                                 </div>
 
                                 <Separator />
 
-                                <div className="flex justify-between w-full py-3 text-sm font-bold">
+                                <div className="flex justify-between w-full py-3 text-sm font-bold lg:text-sm">
                                     <p>Total</p>
                                     <p>R$ {total.toFixed(2)}</p>
                                 </div>

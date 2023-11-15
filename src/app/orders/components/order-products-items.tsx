@@ -14,8 +14,8 @@ const OrderProductItems = ({orderProduct}: OrderProductItemsProps) => {
     const productWithTotalPrice = computeTotalPrice(orderProduct.product)
 
     return ( 
-        <div className="flex gap-4 items-center">
-            <div className="bg-accent rounded-lg w-[100px] h-[77px] flex items-center">
+        <div className="relative flex w-full items-center gap-4">
+            <div className="bg-accent rounded-lg w-[100px] h-[77px] flex items-center lg:h-[130px] lg:w-[150px]">
                 <Image 
                     src={orderProduct.product.imageUrls[0]} 
                     alt={orderProduct.product.name}
@@ -26,25 +26,32 @@ const OrderProductItems = ({orderProduct}: OrderProductItemsProps) => {
                 />
             </div>
 
-            <div className="flex flex-col gap-1 w-full">
+            <div className="flex flex-col gap-1 w-full lg:gap-2">
                 <div className="flex bg-accent px-3 py-1 rounded-md w-fit">
-                    <p className="text-[10px]">Vendido e entregue por 
+                    <p className="text-[10px] lg:text-xs">Vendido e entregue por 
                         <span className="font-bold"> FSW Store</span>
                     </p>
                 </div>
 
-                <p className="text-xs">{orderProduct.product.name}</p>
+                <p className="text-xs lg:text-sm">{orderProduct.product.name}</p>
 
                 <div className="flex items-center gap-1 justify-between w-full">
-                    <div className="flex items-center gap-1">
-                        <p className="text-sm font-bold">R$ {productWithTotalPrice.totalPrice.toFixed(2)}</p>
+                    <div className="bottom-0 flex items-center justify-center gap-1 text-right lg:absolute lg:right-0 lg:top-0 lg:my-auto lg:flex-col lg:items-end">
+                        <p className="text-sm font-bold lg:text-xl">R$ {productWithTotalPrice.totalPrice.toFixed(2)}</p>
 
                         {productWithTotalPrice.discountPercentage > 0 && (
-                            <p className="opacity-60 line-through text-xs">R$ {Number(productWithTotalPrice.basePrice).toFixed(2)}</p>
+                            <p className="opacity-60 line-through text-xs lg:text-sm">
+                                R$ {Number(productWithTotalPrice.basePrice).toFixed(2)}
+                            </p>
                         )}
                     </div>
 
-                    <p className="text-xs opacity-60">Qntd: {orderProduct.quantity}</p>
+                    <p className="text-xs opacity-60 lg:hidden">
+                        Qntd: {orderProduct.quantity}
+                    </p>
+                    <p className="hidden text-sm opacity-60 lg:block">
+                        Quantidade: {orderProduct.quantity}
+                    </p>
                 </div>
             </div>
         </div>
