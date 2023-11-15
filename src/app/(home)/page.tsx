@@ -3,6 +3,8 @@ import { db } from '@/lib/prisma'
 import ProductList from '../../components/ui/product-list'
 import SectionTitle from '../../components/ui/section-title'
 import PromoBanner from './components/promo-banner'
+import Image from "next/image";
+
 
 export default async function Home() {
   const deals = await db.product.findMany({
@@ -30,44 +32,84 @@ export default async function Home() {
   });
 
   return (
-    <div className='flex flex-col gap-8 py-8'>
-      <PromoBanner 
-        src="/banner-home-01.png"
-        alt='até 55% de desconto esse mês'
-      />
-
-      <div className="px-5">
-        <Categories />
-      </div>
-
-      <div>
-        <SectionTitle>Ofertas</SectionTitle>
-        <ProductList products={deals} />
-      </div>
-
-      <PromoBanner 
-        src="/banner-home-02.png"
-        alt='até 55% de desconto em mouses'
-      />
-
-      <div>
-        <SectionTitle>Teclados</SectionTitle>
-        <ProductList products={keyboards} />
-      </div>
-
-      
-        <PromoBanner 
-          src="/banner-home-03.png"
-          alt='até 55% de desconto em fones'
+    <>
+      <div className="mx-auto max-w-[1920px]">
+        <Image
+          src="/deals-banner.png"
+          className="hidden h-auto w-full lg:block"
+          width={0}
+          height={0}
+          sizes="100vw"
+          alt="Até 55% de desconto esse mês!"
         />
-      
-
-      <div>
-        <SectionTitle>Mouses</SectionTitle>
-        <ProductList products={mouses} />
       </div>
 
-      
-    </div>
+      <div className="container mx-auto flex flex-col gap-8 py-8">
+        <PromoBanner
+          src="/banner-home-01.png"
+          alt="Até 55% de desconto esse mês!"
+          className="lg:hidden"
+        />
+
+        <div className="px-5">
+          <Categories />
+        </div>
+
+        <div>
+          <SectionTitle>Ofertas</SectionTitle>
+          <ProductList products={deals} />
+        </div>
+
+        
+        <div className='hidden md:flex justify-between items-center w-full gap-1 '>
+          <PromoBanner
+            src="/banner-home-02.png"
+            alt="Até 55% de desconto em mouses!"
+            sizes='50vw'
+            className='w-full'
+          />
+
+          <PromoBanner
+            src="/banner-home-03.png"
+            alt="Até 55% de desconto em mouses!"
+            sizes='50vw'
+            className='w-full'
+          />
+        </div>
+
+        <PromoBanner
+          src="/banner-home-02.png"
+          alt="Até 55% de desconto em mouses!"
+          className='lg:hidden'
+        />
+
+        <div>
+          <SectionTitle>Teclados</SectionTitle>
+          <ProductList products={keyboards} />
+        </div>
+
+        <div className="mx-auto max-w-[1920px]">
+          <Image
+            src="/banner-fretegrátis.png"
+            className="hidden h-auto w-full lg:block"
+            width={0}
+            height={0}
+            sizes="100vw"
+            alt="Até 55% de desconto esse mês!"
+          />
+        </div>
+
+        <PromoBanner
+          src="/banner-home-03.png"
+          alt="Até 55% de desconto em mouses!"
+          className="lg:hidden"
+        />
+
+        <div>
+          <SectionTitle>Mouses</SectionTitle>
+          <ProductList products={mouses} />
+        </div>
+      </div>
+    </>
   )
 }
