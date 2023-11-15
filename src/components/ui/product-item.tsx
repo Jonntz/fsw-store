@@ -11,7 +11,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
     return (
         <Link href={`/product/${product.slug}`}>
             <div className="flex flex-col gap-4 ">
-                <div className="relative bg-accent rounded-lg h-[170px] w-full flex justify-center items-center lg:h-[200px]">
+                <div className="relative bg-accent rounded-lg h-[170px] w-full flex justify-center items-center aspect-square ">
                     <Image 
                         src={product.imageUrls[0]} 
                         height={0} width={0} 
@@ -39,16 +39,16 @@ const ProductItem = ({ product }: ProductItemProps) => {
                     <div className="flex items-center gap-2 ">
                         {product.discountPercentage > 0 ? (
                             <>
-                                <p className="font-semibold overflow-hidden whitespace-nowrap text-ellipsis"> 
+                                <p className="font-semibold overflow-hidden whitespace-nowrap text-ellipsis lg:text-lg"> 
                                     R$ {Number(product.totalPrice).toFixed(2) } 
                                 </p>
                                 
-                                <p className="opacity-75 line-through text-xs overflow-hidden whitespace-nowrap text-ellipsis"> 
+                                <p className="opacity-75 line-through text-xs overflow-hidden whitespace-nowrap text-ellipsis lg:text-sm"> 
                                     R$ {Number(product.basePrice).toFixed(2) } 
                                 </p>
                             </>
                         ) : (
-                            <p className="opacity-75 line-through text-xs overflow-hidden whitespace-nowrap text-ellipsis"> 
+                            <p className="opacity-75 line-through text-xs overflow-hidden whitespace-nowrap text-ellipsis lg:text-sm"> 
                                 R$ {Number(product.basePrice).toFixed(2) } 
                             </p>
                         )}
